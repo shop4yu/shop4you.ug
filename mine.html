@@ -1,0 +1,503 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop4you</title>
+    <link rel="stylesheet" href="styles.css"> <!-- Link to external CSS -->
+</head>
+<body>
+    <header>
+        <div class="header-content">
+            <div class="left-menu">
+                <span class="menu-icon" id="menu-toggle" aria-label="Toggle Menu">&#9776;</span>
+                <span class="store-name">Shop4you</span>
+            </div>
+            <div class="search-bar">
+                <input type="text" placeholder="Search..." aria-label="Search">
+                <button aria-label="Search Button">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.5 18a7.5 7.5 0 100-15 7.5 7.5 0 000 15zM21 21l-4.35-4.35" />
+                    </svg>
+                </button>
+            </div>
+            <div class="right-icons">
+                <span class="icon" aria-label="Account">👤</span>
+                <span class="cart-icon" aria-label="Cart">🛒<span class="cart-count">0</span></span>
+            </div>
+        </div>
+        <nav id="menu" class="nav-menu" aria-label="Main Navigation">
+            <button id="close-menu" aria-label="Close Menu">&times;</button>
+            <ul>
+                <li class="sign-in">Sign In<span class="sign-in-icon">👤</span></li>
+                <li>Browse Shop4you</li>
+                <li>Shop4you Home</li>
+                <li>Trending</li>
+                <li>Delivery Policy</li>
+                <li>Clothing</li>
+                <li>Shoes</li>
+                <li>Jewelry</li>
+                <li>Watches</li>
+                <li>Bags</li>
+                <li>Electronics</li>
+                <li>Social Media</li>
+                <li>About Us</li>
+                <li>Contact</li>
+                <li>More</li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="section-slider">
+        <div class="slider-container">
+            <div class="slider-track">
+                <div class="slide">      
+                    <a href="product1.html">
+                        <img src="icon-6.jpg" alt="Product 1">
+                        <div class="slide-content">
+                            <h3>Telephone</h3>
+                            <button>Shop Now</button>
+                        </div>
+                    </a>
+                </div>
+                <div class="slide">      
+                    <a href="product2.html">
+                        <img src="icon-6.jpg" alt="Product 2">
+                        <div class="slide-content">
+                            <h3>Electronics</h3>
+                            <button>Shop Now</button>
+                        </div>
+                    </a>
+                </div>
+                <div class="slide">      
+                    <a href="product3.html">
+                        <img src="icon-1.jpg" alt="Product 3">
+                        <div class="slide-content">
+                            <h3>Shoes</h3>
+                            <button>Shop Now</button>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="featured-products">
+        <div class="product-container">
+            <img id="featured-image" src="a.jpg" alt="Featured Product">
+        </div>
+        <a href="all-featured-products.html" class="view-all">View All</a>
+    </div>
+
+    <script src="scripts.js"></script> <!-- Link to external JavaScript -->
+
+<style>
+/* General Page Styling */
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #f8f9fa;
+    --text-color: #343a40;
+    --border-color: #ddd;
+    --hover-color: #0056b3;
+    --red: #dc3545;
+    --font-small: 14px; /* Smaller font size for small screens */
+    --font-medium: 16px; /* Default font size */
+    --font-large: 18px; /* Larger font size for large screens */
+}
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+}
+
+/* Header Styling */
+header {
+    background-color: white;
+    border-bottom: 1px solid var(--border-color);
+    padding: 10px 15px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+    transition: background-color 0.3s ease;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.left-menu {
+    display: flex;
+    align-items: center;
+}
+
+.menu-icon {
+    font-size: var(--font-medium);
+    margin-right: 10px;
+    cursor: pointer;
+    transition: color 0.3s;
+}
+
+.menu-icon:hover {
+    color: var(--hover-color);
+}
+
+.store-name {
+    font-size: var(--font-large);
+    font-weight: bold;
+}
+
+.search-bar {
+    flex-grow: 1;
+    margin: 0 15px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.search-bar input {
+    width: 70%;
+    padding: 8px;
+    font-size: var(--font-medium);
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+.search-bar input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+}
+
+.search-bar button {
+    padding: 5px;
+    background-color: transparent;
+    color: var(--text-color);
+    border: none;
+    cursor: pointer;
+    font-size: var(--font-medium);
+    transition: transform 0.2s;
+}
+
+.search-bar button:hover {
+    transform: scale(1.1);
+}
+
+.search-bar button svg {
+    width: 20px;
+    height: 20px;
+}
+
+.right-icons {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.icon,
+.cart-icon {
+    font-size: var(--font-medium);
+    cursor: pointer;
+    position: relative;
+    transition: color 0.3s;
+}
+
+.icon:hover,
+.cart-icon:hover {
+    color: var(--hover-color);
+}
+
+.cart-count {
+    position: absolute;
+    top: -5px;
+    right: -10px;
+    background-color: var(--red);
+    color: white;
+    border-radius: 50%;
+    padding: 3px 5px;
+    font-size: 12px;
+}
+
+/* Hidden Toggle Menu */
+.nav-menu {
+    display: none;
+    flex-direction: column;
+    background-color: #333;
+    padding: 10px;
+    position: absolute;
+    top: 0px;
+    padding-bottom: 50px;
+    left: 0;
+    width: 94.9%;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    opacity: 0;
+    visibility: hidden;
+}
+
+.nav-menu.open {
+    display: flex;
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Menu Items Styling */
+.nav-menu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.nav-menu ul li {
+    padding: 12px 15px;
+    color: white;
+    border-bottom: 1px solid #444;
+    transition: background-color 0.3s;
+}
+
+.nav-menu ul li:hover {
+    background-color: #555;
+    cursor: pointer;
+}
+
+/* Sign In Menu Item Styling */
+.nav-menu ul {
+    display: flex;
+    flex-direction: column;
+}
+
+.nav-menu ul li {
+    padding: 10px 15px;
+    color: white;
+    display: flex;
+    align-items: center;
+}
+
+/* Sign In Menu Item Specific Styling */
+.nav-menu ul li.sign-in {
+    justify-content: flex-end;
+}
+
+/* Sign In Icon Styling */
+.sign-in-icon {
+    margin-left: 8px;
+    font-size: 20px;
+}
+
+/* Close Button Styling */
+.nav-menu #close-menu {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    font-size: 24px;
+    align-self: flex-end;
+    margin-bottom: 10px;
+}
+
+/* Close button hover effect */
+.nav-menu #close-menu:hover {
+    color: var(--hover-color);
+}
+
+/* Media Queries for Responsiveness */
+@media screen and (max-width: 768px) {
+    .search-bar {
+        margin: 0;
+        flex-grow: 2;
+    }
+
+    .store-name {
+        font-size: var(--font-medium);
+    }
+
+    .menu-icon {
+        font-size: var(--font-small);
+    }
+
+    .right-icons {
+        gap: 8px;
+    }
+
+    .header-content {
+        justify-content: space-between;
+    }
+}
+
+@media screen and (min-width: 769px) {
+    .store-name {
+        font-size: var(--font-large);
+    }
+
+    .menu-icon {
+        font-size: var(--font-large);
+    }
+
+    .right-icons {
+        gap: 15px;
+    }
+}
+
+/* Slider Styles */
+.slider-container {
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    overflow: hidden;
+    position: relative;
+    height: 200px;
+}
+
+.slider-track {
+    display: flex;
+    transition: transform 0.3s ease-in-out;
+    will-change: transform;
+}
+
+.slide {
+    min-width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    flex-shrink: 0;
+    padding: 20px;
+}
+
+.slide img {
+    width: 100%;
+    height: 150px;
+    object-fit: cover;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Featured Products Styles */
+.featured-products {
+    position: relative;
+    width: 90%;
+    max-width: 400px;
+    height: auto;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 8px;
+}
+
+.product-container {
+    width: 100%;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.product-container img {
+    width: 100%;
+    height: auto;
+    max-height: 100%;
+    object-fit: cover;
+    transition: opacity 1s ease-in-out;
+    opacity: 1;
+}
+
+.view-all {
+    margin-top: 20px;
+    text-decoration: none;
+    color: #007BFF;
+    font-weight: bold;
+    font-size: 1.1em;
+}
+
+/* Media Queries for Responsiveness */
+@media (max-width: 768px) {
+    .featured-products {
+        max-width: 90%;
+        padding: 5px;
+    }
+    
+    .product-container {
+        height: 200px;
+    }
+}
+
+@media (max-width: 480px) {
+    .featured-products {
+        max-width: 95%;
+    }
+    
+    .view-all {
+        font-size: 1em;
+    }
+}
+</style>
+<script>
+    // Slider Script
+const sliderContainer = document.querySelector('.slider-container');
+const sliderTrack = document.querySelector('.slider-track');
+const slides = document.querySelectorAll('.slide');
+const totalSlides = slides.length;
+let currentIndex = 0;
+
+function updateSliderPosition() {
+    const offset = -currentIndex * 100;
+    sliderTrack.style.transform = `translateX(${offset}%)`;
+}
+
+function showNextSlide() {
+    currentIndex = (currentIndex + 1) % totalSlides; // Loop back to first slide
+    updateSliderPosition();
+}
+
+function showPrevSlide() {
+    currentIndex = (currentIndex - 1 + totalSlides) % totalSlides; // Loop back to last slide
+    updateSliderPosition();
+}
+
+// Automatic slide change every 5 seconds
+setInterval(showNextSlide, 5000);
+
+// Event listeners for next and previous buttons (if applicable)
+// document.querySelector('.next-button').addEventListener('click', showNextSlide);
+// document.querySelector('.prev-button').addEventListener('click', showPrevSlide);
+
+// Optionally, you can implement swipe functionality for mobile devices
+let startX;
+
+sliderContainer.addEventListener('touchstart', (e) => {
+    startX = e.touches[0].clientX;
+});
+
+sliderContainer.addEventListener('touchmove', (e) => {
+    const endX = e.touches[0].clientX;
+    if (startX > endX + 20) {
+        showNextSlide(); // Swipe left
+    } else if (startX < endX - 20) {
+        showPrevSlide(); // Swipe right
+    }
+});
+
+// Optional: Pause the slider on hover
+sliderContainer.addEventListener('mouseenter', () => {
+    clearInterval(autoSlide); // Pause automatic sliding
+});
+
+sliderContainer.addEventListener('mouseleave', () => {
+    autoSlide = setInterval(showNextSlide, 5000); // Resume automatic sliding
+});
+</script>
+</body>
+</html>

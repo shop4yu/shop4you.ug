@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signup Form with Shop4you</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2 id="formTitle">Sign Up with Shop4you</h2>
+        <form id="signupForm">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text" id="username" name="username" required>
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <div class="password-container">
+                    <input type="password" id="password" name="password" required>
+                    <span id="togglePassword" class="toggle-password" onclick="togglePassword('password')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <div class="password-hint" id="passwordHint">
+                    Password must be at least 8 characters long, and include at least one uppercase letter, one lowercase letter, one number, and one special character.
+                </div>
+                <span id="passwordError" class="error"></span>
+                <div class="password-strength" id="passwordStrength"></div>
+            </div>
+            <div class="form-group">
+                <label for="confirmPassword">Confirm Password</label>
+                <div class="password-container">
+                    <input type="password" id="confirmPassword" name="confirmPassword" required>
+                    <span id="toggleConfirmPassword" class="toggle-password" onclick="togglePassword('confirmPassword')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <span id="confirmPasswordError" class="error"></span>
+            </div>
+            <button type="submit">Signup</button>
+        </form>
+        <div id="message"></div>
+        <div class="social-login">
+            <p>Or sign up with:</p>
+            <a href="#" onclick="signInWithGoogle()"><i class="fab fa-google social-logo"></i></a>
+            <a href="#" onclick="signInWithLinkedIn()"><i class="fab fa-linkedin social-logo"></i></a>
+            <a href="#" onclick="signInWithFacebook()"><i class="fab fa-facebook social-logo"></i></a>
+        </div>
+        <p id="welcomeBackMessage" style="display:none;"></p>
+        <p id="loginPrompt">Already have an account? <a href="#" id="toggleLoginLink">Log in</a></p>
+    </div>
+    
+    <style>
+    /* styles.css */
+.container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: auto;
+}
+
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+input {
+    width: 100%;
+    padding: 8px;
+    box-sizing: border-box;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #5cb85c;
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #4cae4c;
+}
+
+.social-login {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.social-logo {
+    font-size: 20px; /* Adjust size as needed */
+    margin: 0 10px;
+    color: #333; /* Default icon color */
+    transition: color 0.3s;
+}
+
+.social-logo:hover {
+    color: #007BFF; /* Change color on hover */
+}
+
+.password-container {
+    position: relative;
+}
+
+.toggle-password {
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+    color: #aaa; /* Icon color */
+}
+
+.toggle-password:hover {
+    color: #333; /* Icon color on hover */
+}
+
+#error {
+    color: red;
+}    
+    </style>
+
+    <script>
+        
+      // script.js
+
+// Function to toggle the visibility of the password
+function togglePassword(fieldId) {
+    const passwordField = document.getElementById(fieldId);
+    const toggleIcon = document.getElementById('toggle' + capitalizeFirstLetter(fieldId));
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        toggleIcon.innerHTML = '<i class="fas fa-eye-slash"></i>'; // Show password icon
+    } else {
+        passwordField.type = "password";
+        toggleIcon.innerHTML = '<i class="fas fa-eye"></i>'; // Hide password icon
+    }
+}
+
+function capitalizeFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+}
+
+// Simulated existing users for demonstration purposes
+const existingUsers = [
+    { username: 'existingUser', email: 'user@example.com' }
+];
+
+// Event listener for the signup form submission
+document.getElementById('signupForm').addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    let username = document.getElementById('username').value;
+    let email = document.getElementById('email').value;
+    let password = document.getElementById('password').value;
+    let confirmPassword = document.getElementById('confirmPassword').value;
+    let message = document.getElementById('message');
+    let passwordError = document.getElementById('passwordError');
+    let confirmPasswordError = document.getElementById('confirmPasswordError');
+
+    // Check if the user already exists
+    if (existingUsers.some(user => user.email === email)) {
+        message.style.color = 'red';
+        message.textContent = 'An account with this email already exists. Please log in.';
+        return;
+    }
+
+    let passwordValid = validatePassword(password);
+    if (!passwordValid) {
+        passwordError.textContent = 'Password does not meet the requirements.';
+        return;
+    } else {
+        passwordError.textContent = '';
+    }
+
+    if (password !== confirmPassword) {
+        confirmPasswordError.textContent = 'Passwords do not match!';
+        return;
+    } else {
+        confirmPasswordError.textContent = '';
+    }
+
+    // Here you can add code to send the form data to the server
+
+    message.style.color = 'green';
+    message.textContent = 'Signup successful with Shop4you!';
+});
+
+// Function to show a welcome back message
+function showWelcomeBack(username) {
+    let welcomeMessage = document.getElementById('welcomeBackMessage');
+    welcomeMessage.style.display = 'block';
+    welcomeMessage.textContent = 'Welcome back, ' + username + '!';
+}
+
+// Functions for social login
+function signInWithGoogle() {
+    let username = 'Google User'; // You can replace this with actual login logic
+    showWelcomeBack(username);
+}
+
+function signInWithLinkedIn() {
+    let username = 'LinkedIn User'; // You can replace this with actual login logic
+    showWelcomeBack(username);
+}
+
+function signInWithFacebook() {
+    let username = 'Facebook User'; // You can replace this with actual login logic
+    showWelcomeBack(username);
+}
+
+// Password validation function
+function validatePassword(password) {
+    // Password validation logic
+    const passwordStrength = getPasswordStrength(password);
+    const strengthBar = document.getElementById('passwordStrength');
+    strengthBar.innerHTML = '';
+
+    if (passwordStrength) {
+        const strengthDiv = document.createElement('div');
+        strengthDiv.className = passwordStrength;
+        strengthDiv.textContent = `Password Strength: ${capitalizeFirstLetter(passwordStrength)}`;
+        strengthBar.appendChild(strengthDiv);
+    }
+
+    return passwordStrength !== ''; // Return true if password is valid
+}
+
+// Function to determine password strength
+function getPasswordStrength(password) {
+    if (password.length < 8) {
+        return ''; // Return empty if password is too short
+    }
+    if (password.length < 12) {
+        return 'weak'; // Weak password
+    } else if (password.length < 16) {
+        return 'medium'; // Medium password
+    } else {
+        return 'strong'; // Strong password
+    }
+}
+
+// Display the password hint on focus
+document.getElementById('password').addEventListener('focus', function () {
+    document.getElementById('passwordHint').style.display = 'block';
+});
+
+// Hide the password hint on blur
+document.getElementById('password').addEventListener('blur', function () {
+    document.getElementById('passwordHint').style.display = 'none';
+});
+
+// Event listeners for input validation
+document.getElementById('password').addEventListener('input', function () {
+    validatePassword(this.value);
+});
+
+document.getElementById('confirmPassword').addEventListener('input', function () {
+    if (this.value !== document.getElementById('password').value) {
+        document.getElementById('confirmPasswordError').textContent = 'Passwords do not match!';
+    } else {
+        document.getElementById('confirmPasswordError').textContent = '';
+    }
+});
+
+// Toggle login form visibility
+document.getElementById('toggleLoginLink').addEventListener('click', function (event) {
+    event.preventDefault(); // Prevent default anchor behavior
+    const formTitle = document.getElementById('formTitle');
+    const signupForm = document.getElementById('signupForm');
+    const loginForm = document.createElement('form');
+
+    // Toggle between signup and login
+    if (formTitle.innerText === 'Sign Up with Shop4you') {
+        formTitle.innerText = 'Log In with Shop4you';
+        signupForm.style.display = 'none';
+
+        loginForm.innerHTML = `
+            <div class="form-group">
+                <label for="loginEmail">Email</label>
+                <input type="email" id="loginEmail" name="loginEmail" required>
+            </div>
+            <div class="form-group">
+                <label for="loginPassword">Password</label>
+                <div class="password-container">
+                    <input type="password" id="loginPassword" name="loginPassword" required>
+                    <span id="toggleLoginPassword" class="toggle-password" onclick="togglePassword('loginPassword')">
+                        <i class="fas fa-eye"></i>
+                    </span>
+                </div>
+                <span id="loginPasswordError" class="error"></span>
+            </div>
+            <button type="submit">Log In</button>
+        `;
+
+        loginForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const loginEmail = document.getElementById('loginEmail').value;
+            const loginPassword = document.getElementById('loginPassword').value;
+            // You can replace this with actual login logic
+            if (existingUsers.some(user => user.email === loginEmail)) {
+                showWelcomeBack('User');
+            } else {
+                document.getElementById('loginPasswordError').textContent = 'Invalid credentials!';
+            }
+        });
+
+        document.querySelector('.container').appendChild(loginForm);
+    } else {
+        formTitle.innerText = 'Sign Up with Shop4you';
+        signupForm.style.display = 'block';
+        if (document.querySelector('.container form:last-child')) {
+            document.querySelector('.container form:last-child').remove();
+        }
+    }
+}); 
+        
+    </script>
+</body>
+
+</html>

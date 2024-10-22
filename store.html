@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple Store</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+    <!-- Store Container -->
+    <div class="store-container">
+        <h1>Welcome to Shop4You Store</h1>
+
+        <!-- Products Section -->
+        <div class="product-section">
+            <div class="product">
+                <img src="phone.jpg" alt="Phone" class="product-image">
+                <h2>Smartphone</h2>
+                <p>Latest model with 64GB storage</p>
+                <button class="add-to-cart" data-product="Phone">Add to Cart</button>
+            </div>
+            <div class="product">
+                <img src="shoes.jpg" alt="Shoes" class="product-image">
+                <h2>Running Shoes</h2>
+                <p>Comfortable and durable</p>
+                <button class="add-to-cart" data-product="Shoes">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Cart Info -->
+        <div class="cart-section">
+            <h2>Cart</h2>
+            <p>Items in cart: <span id="cart-count">0</span></p>
+            <button id="place-order" class="place-order-btn">Place Order</button>
+        </div>
+    </div>
+
+    <!-- Billing Page -->
+    <div class="billing-page hidden">
+        <h2>Billing Information</h2>
+        <p>Number of orders: <span id="order-count">0</span></p>
+        <label for="shipping-location">Shipping Location:</label>
+        <input type="text" id="shipping-location" placeholder="Enter your address">
+        <button id="submit-order" class="submit-order-btn">Submit Order</button>
+    </div>
+    
+    <style>
+        
+  /* General styling */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f9fa;
+}
+
+h1, h2 {
+    color: #343a40;
+    text-align: center;
+}
+
+/* Store Container */
+.store-container {
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.product-section {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin-top: 20px;
+}
+
+.product {
+    text-align: center;
+    border: 1px solid #dee2e6;
+    padding: 15px;
+    margin: 10px;
+    width: 280px;
+    background-color: #f1f3f5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+    transition: transform 0.3s ease;
+}
+
+.product:hover {
+    transform: translateY(-5px);
+}
+
+/* Responsive Rectangular Image */
+.product-image {
+    width: 100%; /* Take full width of the container */
+    height: auto; /* Maintain aspect ratio */
+    max-height: 180px; /* Control the maximum height to keep it rectangular */
+    object-fit: cover; /* Ensures the image covers the container without distortion */
+    border-radius: 5px;
+}
+
+/* Cart Section */
+.cart-section {
+    margin-top: 30px;
+    padding: 20px;
+    text-align: center;
+    border-top: 2px solid #dee2e6;
+    background-color: #f8f9fa;
+    border-radius: 0 0 10px 10px;
+}
+
+.cart-section h2 {
+    margin-bottom: 10px;
+}
+
+.place-order-btn {
+    background-color: #28a745;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    margin-top: 15px;
+    transition: background-color 0.3s ease;
+    width: 100%;
+}
+
+.place-order-btn:hover {
+    background-color: #218838;
+}
+
+/* Billing Page */
+.billing-page {
+    width: 90%;
+    margin: 20px auto;
+    padding: 30px;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.billing-page.hidden {
+    display: none;
+}
+
+.billing-page h2 {
+    margin-bottom: 15px;
+    color: #343a40;
+}
+
+.billing-page label {
+    display: block;
+    margin: 10px 0 5px;
+    color: #495057;
+    font-size: 14px;
+}
+
+.billing-page input {
+    width: 100%;
+    padding: 12px 10px;
+    border: 1px solid #ced4da;
+    border-radius: 5px;
+    margin-bottom: 20px;
+}
+
+.submit-order-btn {
+    background-color: #ff5733;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px;
+    width: 100%;
+    transition: background-color 0.3s ease;
+}
+
+.submit-order-btn:hover {
+    background-color: #c70039;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .product-section {
+        justify-content: center; /* Center products on small screens */
+    }
+
+    .product {
+        width: 100%; /* Make products full width on smaller screens */
+        margin: 10px 0;
+    }
+
+    .cart-section, .billing-page {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .store-container, .billing-page {
+        width: 95%;
+    }
+
+    .add-to-cart, .place-order-btn, .submit-order-btn {
+        padding: 10px;
+    }
+}
+    </style>
+
+    <script>
+        
+        
+        let cartCount = 0;
+
+document.querySelectorAll('.add-to-cart').forEach(button => {
+    button.addEventListener('click', function() {
+        cartCount++;
+        document.getElementById('cart-count').innerText = cartCount;
+    });
+});
+
+document.getElementById('place-order').addEventListener('click', function() {
+    document.querySelector('.store-container').classList.add('hidden');
+    document.querySelector('.billing-page').classList.remove('hidden');
+    document.getElementById('order-count').innerText = cartCount;
+});
+
+document.getElementById('submit-order').addEventListener('click', function() {
+    alert('Order submitted! Shipping to: ' + document.getElementById('shipping-location').value);
+});        
+        
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop4you.ug Account</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+</head>
+
+<body>
+    <div class="container">
+        <h2>Shop4you.ug Account</h2>
+
+        <form id="accountForm">
+            <fieldset>
+                <legend>My Account Information</legend>
+
+                <div class="form-group">
+                    <label for="profileImage">Upload Profile Image</label>
+                    <div class="image-upload">
+                        <label for="profileImageInput" class="image-placeholder">
+                            <i class="fas fa-upload"></i>
+                            <span>Click or Drag to Upload Image</span>
+                        </label>
+                        <input type="file" id="profileImageInput" accept="image/*" style="display: none;">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" name="username" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="text" id="phone" name="phone">
+                </div>
+
+                <div class="form-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" required></textarea>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Billing Information</legend>
+                <div class="form-group">
+                    <label for="billingAddress">Billing Address</label>
+                    <textarea id="billingAddress" name="billingAddress" rows="3" required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="creditCard">Credit Card Number</label>
+                    <input type="text" id="creditCard" name="creditCard" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="expirationDate">Expiration Date</label>
+                    <input type="text" id="expirationDate" name="expirationDate" placeholder="MM/YY" required>
+                </div>
+            </fieldset>
+
+            <fieldset>
+                <legend>Order Management</legend>
+                <div class="form-group">
+                    <label for="orderStatus">Update Order Status</label>
+                    <input type="text" id="orderStatus" name="orderStatus">
+                </div>
+
+                <div class="form-group">
+                    <label for="message">Message Business</label>
+                    <textarea id="message" name="message" rows="3"></textarea>
+                </div>
+            </fieldset>
+
+            <button type="submit">Update Account</button>
+        </form>
+<!-- Add this inside your <body> tag, after the form -->
+<div id="displayInfo" style="display: none;">
+    <h3>Updated Account Information</h3>
+    <div id="uploadedImageDisplay" class="uploaded-image">
+    </div>
+<style>
+    /* Styles for the display area after submission */
+#displayInfo {
+    background-color: #f9f9f9; /* Light background for the display area */
+    border: 1px solid #ddd; /* Border to define the area */
+    border-radius: 8px; /* Rounded corners */
+    padding: 20px; /* Padding around the content */
+    margin-top: 20px; /* Space above the display area */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+}
+
+/* Heading for updated account information */
+#displayInfo h3 {
+    font-size: 20px; /* Font size for the heading */
+    color: #007BFF; /* Brand color */
+    margin-bottom: 15px; /* Space below the heading */
+    text-align: center; /* Center the heading text */
+}
+
+/* Styles for the uploaded image */
+.uploaded-image {
+    height: 150px; /* Fixed height for the uploaded image */
+    border-radius: 8px; /* Rounded corners for the image */
+    margin-bottom: 15px; /* Space below the image */
+    background-size: cover; /* Ensure the image covers the area */
+    background-position: center; /* Center the image */
+    border: 2px solid #007BFF; /* Brand color border */
+}
+
+/* Styles for displaying account information */
+#displayInfo p {
+    margin: 5px 0; /* Space between paragraphs */
+    font-size: 16px; /* Font size for the account information */
+}
+
+/* Styles for the key information labels */
+#displayInfo p:first-child {
+    font-weight: bold; /* Bold font for the labels */
+    color: #333; /* Darker color for better visibility */
+}
+
+/* Responsive Design Adjustments */
+@media (max-width: 600px) {
+    #displayInfo {
+        padding: 15px; /* Adjust padding for smaller screens */
+    }
+
+    #displayInfo h3 {
+        font-size: 18px; /* Smaller heading font size */
+    }
+
+    #displayInfo p {
+        font-size: 14px; /* Smaller font size for account information */
+    }
+}
+    /* Basic Reset */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+    padding: 20px;
+}
+
+/* Main Container */
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 15px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+}
+
+/* Header */
+h2 {
+    margin-bottom: 20px;
+    text-align: center;
+    font-size: 24px;
+    color: #007BFF; /* Brand color */
+}
+
+/* Fieldset Styles */
+fieldset {
+    border: 1px solid #dcdcdc;
+    border-radius: 8px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+legend {
+    font-weight: bold;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #007BFF; /* Brand color */
+}
+
+/* Form Group Styles */
+.form-group {
+    margin-bottom: 15px;
+}
+
+/* Label Styles */
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+/* Input and Textarea Styles */
+input,
+textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s;
+}
+
+/* Input Focus Styles */
+input:focus,
+textarea:focus {
+    border-color: #007BFF; /* Brand color */
+    outline: none;
+}
+
+/* Button Styles */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #007BFF; /* Brand color */
+    border: none;
+    color: white;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Button Hover Styles */
+button:hover {
+    background-color: #0056b3; /* Darker shade */
+    transform: translateY(-1px);
+}
+
+/* Responsive Design */
+@media (max-width: 600px) {
+    .container {
+        padding: 15px;
+    }
+
+    h2 {
+        font-size: 20px;
+    }
+
+    button {
+        padding: 10px;
+    }
+}
+
+@media (max-width: 400px) {
+    input,
+    textarea {
+        font-size: 14px;
+    }
+
+    h2 {
+        font-size: 18px;
+    }
+}
+
+/* Additional Styles */
+textarea {
+    resize: none; /* Disable resizing for textareas */
+}
+
+/* Image Upload Styles */
+.image-upload {
+    position: relative;
+    height: 150px; /* Fixed height for the placeholder */
+}
+.uploaded-image {
+    position: relative;
+    height: 150px; /* Set a height for the image display */
+    border-radius: 4px; /* Round corners */
+    margin-bottom: 20px; /* Space below the displayed image */
+    background-size: cover; /* Ensure the image covers the area */
+    background-position: center; /* Center the image */
+    border: 1px solid #ddd; /* Optional: border around the image */
+}
+.image-placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    text-align: center;
+    transition: border-color 0.3s;
+    overflow: hidden; /* Hide overflow to prevent text showing */
+}
+
+.image-placeholder:hover {
+    border-color: #007BFF; /* Change border color on hover */
+}
+
+.image-placeholder i {
+    font-size: 40px; /* Adjust icon size */
+    color: #007BFF; /* Icon color */
+}
+
+.image-placeholder span {
+    margin-top: 5px;
+    font-size: 14px; /* Text size */
+    color: #333; /* Text color */
+}
+    
+</style>
+    <script>
+        
+// script.js
+
+document.addEventListener('DOMContentLoaded', function() {
+    // Handle image upload
+    document.getElementById('profileImageInput').addEventListener('change', function(event) {
+        const file = event.target.files[0];
+        const imagePlaceholder = document.querySelector('.image-placeholder');
+
+        if (file) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                // Set the background image of the placeholder and hide the text
+                imagePlaceholder.style.backgroundImage = `url(${e.target.result})`;
+                imagePlaceholder.style.backgroundSize = 'cover';
+                imagePlaceholder.style.backgroundPosition = 'center';
+                imagePlaceholder.innerHTML = ''; // Clear the placeholder text
+            };
+            reader.readAsDataURL(file);
+        } else {
+            // If no file is selected, reset the placeholder
+            resetPlaceholder();
+        }
+    });
+
+    // Function to reset the placeholder
+    function resetPlaceholder() {
+        const placeholder = document.querySelector('.image-placeholder');
+        placeholder.style.backgroundImage = 'none';
+        placeholder.innerHTML = '<i class="fas fa-upload"></i><span>Click or Drag to Upload Image</span>';
+    }
+
+    // Handle form submission
+    document.getElementById('accountForm').addEventListener('submit', function(event) {
+        event.preventDefault(); // Prevent default form submission
+
+        // Gather form data
+        const accountInfo = {
+            username: document.getElementById('username').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            billingAddress: document.getElementById('billingAddress').value,
+            creditCard: document.getElementById('creditCard').value,
+            expirationDate: document.getElementById('expirationDate').value,
+            orderStatus: document.getElementById('orderStatus').value,
+            message: document.getElementById('message').value
+        };
+
+        // Display updated account information
+        const displayInfo = document.getElementById('displayInfo');
+        displayInfo.style.display = 'block'; // Show the display area
+        displayInfo.innerHTML = ''; // Clear previous content
+
+        // Display the uploaded image if it exists
+        const uploadedImageBackground = document.querySelector('.image-placeholder').style.backgroundImage;
+        if (uploadedImageBackground) {
+            displayInfo.innerHTML += `<div class="uploaded-image" style="background-image: ${uploadedImageBackground};"></div>`;
+        }
+
+        // Display account information
+        for (const [key, value] of Object.entries(accountInfo)) {
+            displayInfo.innerHTML += `<p>${key.charAt(0).toUpperCase() + key.slice(1)}</p><p>${value}</p>`;
+        }
+
+        // Optional: Notify user
+        alert("Account information updated successfully!");
+    });
+});
+    </script>
+</body>
+</html>
